@@ -6,6 +6,7 @@ import os
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
+load_dotenv()
 
 # Инициализация бота и диспетчера
 BOT_TOKEN = os.getenv('BOT_TOKEN')
