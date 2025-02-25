@@ -1,15 +1,16 @@
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 import logging
-
-
+from dotenv import load_dotenv
+import os
 
 # Настройка логирования
 logging.basicConfig(level=logging.INFO)
 
 # Инициализация бота и диспетчера
-API_TOKEN = '7557730753:AAEllgsLciduPZzaPY-BcZ7vEElTWPmmF1g'
-bot = Bot(token=API_TOKEN)
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
+bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
 # Создание клавиатуры
@@ -33,10 +34,9 @@ async def send_help(message: types.Message):
 
 # Обработчик всех остальных сообщений
 @dp.message_handler()
-async def echo(message: types.Message):
-    chat_id = '-4718461695'  # Замените на идентификатор чата, куда нужно отправлять сообщения
+async def echo(message: types.Message):  # Замените на идентификатор чата, куда нужно отправлять сообщения
     user_name = message.from_user.first_name  # Получаем имя пользователя
-    await bot.send_message(chat_id, f"{user_name}:\n {message.text}")
+    await bot.send_message(CHAT_ID, f"{user_name}:\n {message.text}")
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True) 
